@@ -1,0 +1,55 @@
+{% extends 'base.html' %} {% block content %}
+<div style="width: 60%; margin: auto">
+  <h2
+    class="row d-flex justify-content-center ; container p-3 my-3 border ; border border-dark"
+  >
+    show_tasks DEMO
+  </h2>
+</div>
+<div style="width: 40%; margin: auto">
+  <h2
+    class="row d-flex justify-content-center ; container p-3 my-3 border bg-primary text-white ; rounded"
+  >
+    Tasks
+  </h2>
+</div>
+<div style="width: 70%; margin: auto">
+  <table class="table table-bordered ; border border-dark ; text-center">
+    <thead>
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Status</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for task in tasks %}
+      <tr>
+        <td>{{ task.taskTitle }}</td>
+        <td>{{ task.taskDescription }}</td>
+        <td>
+          {% if task.is_completed %}Complete{% else %}Incomplete{% endif %}
+        </td>
+
+        <td>
+          <a
+            href="{% url 'delete_task' task.id %}"
+            class="btn btn-danger btn-sm"
+            >Delete</a
+          >
+          <a href="{% url 'edit_task' task.id %}" class="btn btn-primary btn-sm"
+            >Edit</a
+          >
+          <a
+            href="{% url 'complete_task' task.id %}"
+            class="btn btn-success btn-sm"
+            >Complete</a
+          >
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
